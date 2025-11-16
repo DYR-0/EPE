@@ -50,11 +50,11 @@ npm run build
 
 This project is open source and available under the MIT License.
 
-## 👤 Author
+## 👤 Author (Alphabetical Order)
 
-Qiuya Chen
-Yirong Ding
-Lihua Fu
+Qiuya Chen;
+Yirong Ding;
+Lihua Fu;
 Zehong Wang
 
 ---
