@@ -38,8 +38,6 @@ const gradeOptions = [
   { value: "elementary", label: "Elementary School (Grades 1-6)" },
   { value: "middle", label: "Middle School (Grades 7-9)" },
   { value: "high", label: "High School (Grades 10-12)" },
-  { value: "college", label: "College/University" },
-  { value: "adult", label: "Adult Learner" },
   { value: "other", label: "Other" }
 ];
 
