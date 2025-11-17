@@ -4,7 +4,7 @@ A modern, interactive web application built with React and Vite.
 
 ## 🌐 Live Demo
 
-Visit the live site: [https://DYR-0.github.io/EPE/]
+Visit the live site: [https://yirong-ding.github.io/EPE/]
 
 ## Screenshots
    ![Screenshot](screenshot.png)
