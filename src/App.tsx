@@ -26,7 +26,6 @@ export default function App() {
   const [userAnswers, setUserAnswers] = useState<number[]>([]);
   const [quizStartTime, setQuizStartTime] = useState<number>(0);
   const [selectedQuestions, setSelectedQuestions] = useState<typeof questions>([]);
-  const [previousPage, setPreviousPage] = useState<Page>("welcome");
 
   useEffect(() => {
     // Check if preference survey has been completed
@@ -86,13 +85,11 @@ export default function App() {
   };
 
   const handleGoToForum = () => {
-    setPreviousPage(currentPage);
     setCurrentPage("forum");
   };
 
   const handleBackFromForum = () => {
-    // Go back to the page user came from (either welcome or result)
-    setCurrentPage(previousPage === "result" ? "result" : "welcome");
+    setCurrentPage("result");
   };
 
   const handleGoToAccount = () => {
@@ -110,10 +107,9 @@ export default function App() {
         <PreferenceSurvey onComplete={handleSurveyComplete} />
       )}
       {currentPage === "welcome" && (
-        <Welcome
+        <Welcome 
           onStart={handleStart}
           onAccountClick={handleGoToAccount}
-          onForumClick={handleGoToForum}
           hasCompletedSurvey={!!userData.preferences}
           userData={userData}
         />
@@ -132,7 +128,7 @@ export default function App() {
           userData={userData}
         />
       )}
-      {currentPage === "forum" && <Forum onBack={handleBackFromForum} userData={userData} />}
+      {currentPage === "forum" && <Forum onBack={handleBackFromForum} />}
       {currentPage === "account" && (
         <Account userData={userData} onBack={handleBackFromAccount} />
       )}

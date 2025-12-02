@@ -1,7 +1,7 @@
 export interface UserPreferences {
   interests: string[];
   experience: string;
-  goals: string[]; // Changed from 'goal' to support multiple learning goals
+  goal: string;
   age?: number;
   grade?: string;
   name?: string;

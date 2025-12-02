@@ -45,7 +45,7 @@ export function PreferenceSurvey({ onComplete }: PreferenceSurveyProps) {
   const [step, setStep] = useState(1);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [experience, setExperience] = useState("");
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
+  const [goal, setGoal] = useState("");
   const [grade, setGrade] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -58,14 +58,6 @@ export function PreferenceSurvey({ onComplete }: PreferenceSurveyProps) {
     );
   };
 
-  const handleGoalToggle = (goalId: string) => {
-    setSelectedGoals(prev =>
-      prev.includes(goalId)
-        ? prev.filter(id => id !== goalId)
-        : [...prev, goalId]
-    );
-  };
-
   const handleNext = () => {
     if (step < 5) {
       setStep(step + 1);
@@ -73,7 +65,7 @@ export function PreferenceSurvey({ onComplete }: PreferenceSurveyProps) {
       onComplete({
         interests: selectedInterests,
         experience,
-        goals: selectedGoals,
+        goal,
         grade,
         name,
         age: age ? parseInt(age) : undefined
@@ -84,7 +76,7 @@ export function PreferenceSurvey({ onComplete }: PreferenceSurveyProps) {
   const canProceed = () => {
     if (step === 1) return selectedInterests.length > 0;
     if (step === 2) return experience !== "";
-    if (step === 3) return selectedGoals.length > 0;
+    if (step === 3) return goal !== "";
     if (step === 4) return grade !== "";
     if (step === 5) return name !== "" && age !== "";
     return false;
@@ -184,32 +176,30 @@ export function PreferenceSurvey({ onComplete }: PreferenceSurveyProps) {
           {step === 3 && (
             <div className="space-y-4">
               <div>
-                <h3 className="mb-4">What are your goals for using this platform? (Select all that apply)</h3>
-                <div className="space-y-3">
-                  {goalOptions.map((option) => (
-                    <div
-                      key={option.value}
-                      className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${
-                        selectedGoals.includes(option.value)
-                          ? 'border-green-500 bg-green-50 dark:bg-green-950'
-                          : 'border-border hover:border-green-300'
-                      }`}
-                      onClick={() => handleGoalToggle(option.value)}
-                    >
-                      <Checkbox
-                        id={option.value}
-                        checked={selectedGoals.includes(option.value)}
-                        onCheckedChange={() => handleGoalToggle(option.value)}
-                      />
-                      <Label
-                        htmlFor={option.value}
-                        className="flex-1 cursor-pointer"
+                <h3 className="mb-4">What is your main goal for using this platform?</h3>
+                <RadioGroup value={goal} onValueChange={setGoal}>
+                  <div className="space-y-3">
+                    {goalOptions.map((option) => (
+                      <div
+                        key={option.value}
+                        className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${
+                          goal === option.value
+                            ? 'border-green-500 bg-green-50 dark:bg-green-950'
+                            : 'border-border hover:border-green-300'
+                        }`}
+                        onClick={() => setGoal(option.value)}
                       >
-                        {option.label}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
+                        <RadioGroupItem value={option.value} id={option.value} />
+                        <Label
+                          htmlFor={option.value}
+                          className="flex-1 cursor-pointer"
+                        >
+                          {option.label}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </RadioGroup>
               </div>
             </div>
           )}
